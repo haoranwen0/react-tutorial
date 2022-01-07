@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "../css/Square.css";
 
-function Square({ onClick, turn }) {
+function Square({ onClick, turn, position }) {
   const [clicked, updateClicked] = useState(false);
   const [state, updateState] = useState(null);
 
-  function onMouseClick() {
+  const onMouseClick = () => {
     if (!clicked) {
-      onClick();
+      onClick(position);
       updateClicked(true);
       updateState(turn);
     }
-  }
+  };
 
   return (
     <div className="square" onClick={onMouseClick}>
