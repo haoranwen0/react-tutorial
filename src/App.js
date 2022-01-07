@@ -16,6 +16,7 @@ function App() {
     null,
   ]);
   const [winner, setWinner] = useState(null);
+  const [reset, updateReset] = useState(0);
 
   useEffect(() => {
     console.log("Current board: ", board);
@@ -65,6 +66,13 @@ function App() {
     return null;
   };
 
+  const handleReset = (e) => {
+    updateBoard([null, null, null, null, null, null, null, null, null]);
+    updateTurn((prev) => !prev);
+    setWinner(null);
+    updateReset((prev) => prev + 1);
+  };
+
   return (
     <div className="App">
       <h1 className="title">
@@ -74,26 +82,29 @@ function App() {
         style={winner ? { opacity: "0.5", pointerEvents: "none" } : null}
         className="row one"
       >
-        <Square onClick={onClick} turn={turn} position={0} />
-        <Square onClick={onClick} turn={turn} position={1} />
-        <Square onClick={onClick} turn={turn} position={2} />
+        <Square onClick={onClick} turn={turn} position={0} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={1} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={2} reset={reset} />
       </div>
       <div
         style={winner ? { opacity: "0.5", pointerEvents: "none" } : null}
         className="row two"
       >
-        <Square onClick={onClick} turn={turn} position={3} />
-        <Square onClick={onClick} turn={turn} position={4} />
-        <Square onClick={onClick} turn={turn} position={5} />
+        <Square onClick={onClick} turn={turn} position={3} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={4} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={5} reset={reset} />
       </div>
       <div
         style={winner ? { opacity: "0.5", pointerEvents: "none" } : null}
         className="row three"
       >
-        <Square onClick={onClick} turn={turn} position={6} />
-        <Square onClick={onClick} turn={turn} position={7} />
-        <Square onClick={onClick} turn={turn} position={8} />
+        <Square onClick={onClick} turn={turn} position={6} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={7} reset={reset} />
+        <Square onClick={onClick} turn={turn} position={8} reset={reset} />
       </div>
+      <button className="restart-btn" onClick={handleReset}>
+        Restart Game
+      </button>
     </div>
   );
 }
