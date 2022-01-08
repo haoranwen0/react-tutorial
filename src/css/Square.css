@@ -7,4 +7,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.square:hover {
+  background: gray;
+  transform: scale(1.2);
 }

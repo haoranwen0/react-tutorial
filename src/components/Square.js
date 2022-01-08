@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import "../css/Square.css";
 
-function Square({ onClick, turn }) {
+function Square({ onClick, turn, pos, win, board }) {
   const [clicked, updateClicked] = useState(false);
   const [state, updateState] = useState(null);
 
+  useEffect(() => {
+    if (board[pos] === null) {
+      updateClicked(false);
+      updateState(null);
+    }
+  }, [board, pos]);
+
   function onMouseClick() {
-    if (!clicked) {
-      onClick();
+    if (!win && !clicked) {
+      onClick(pos);
       updateClicked(true);
       updateState(turn);
     }
@@ -15,7 +23,7 @@ function Square({ onClick, turn }) {
 
   return (
     <div className="square" onClick={onMouseClick}>
-      {clicked && <>{state ? "O" : "X"}</>}
+      {clicked && <>{state % 2 ? "O" : "X"}</>}
     </div>
   );
 }

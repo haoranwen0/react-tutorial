@@ -1,3 +1,8 @@
-.row {
+.row,
+.history {
   display: flex;
+}
+.history {
+  flex-direction: column;
+  width: 156px;
 }
